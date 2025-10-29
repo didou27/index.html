@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملتقى الوطني حول الجباية والاستراتيجية المالية للمؤسسات الجزائرية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- مكتبة Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 2px solid #006233;
+        }
+        
+        .government-header {
+            background: linear-gradient(135deg, #006233, #D21034);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .government-main {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .government-sub {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        
+        .school-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .header {
+            background: white;
+            color: #000000;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            border-bottom: 5px solid #006233;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ffffff 0%, #D21034 50%, #006233 100%);
+        }
+        
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: #D21034;
+        }
+        
+        .header h2 {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #006233;
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .lang-btn {
+            background: #f8f9fa;
+            border: 2px solid #006233;
+            color: #006233;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .lang-btn.active {
+            background: #D21034;
+            color: white;
+            border-color: #D21034;
+        }
+        
+        .committee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .committee-member {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #006233;
+        }
+        
+        .committee-member .role {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .committee-member .name {
+            font-weight: bold;
+            margin-top: 5px;
+            color: #D21034;
+        }
+        
+        .section {
+            padding: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section-title {
+            color: #D21034;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #006233;
+            font-weight: bold;
+        }
+        
+        .content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .content p {
+            margin-bottom: 15px;
+        }
+        
+        .themes-grid {
+            display: grid;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .theme-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-right: 4px solid #006233;
+        }
+        
+        .theme-title {
+            color: #D21034;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .theme-list {
+            list-style-type: none;
+            padding-right: 20px;
+        }
+        
+        .theme-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-right: 20px;
+        }
+        
+        .theme-list li::before {
+            content: "•";
+            color: #D21034;
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+        }
+        
+        .dates-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid #006233;
+        }
+        
+        .date-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .date-item:hover {
+            background: rgba(210, 16, 52, 0.05);
+            border-color: #D21034;
+        }
+        
+        .date-label {
+            font-weight: bold;
+            color: #006233;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .date-label i {
+            color: #D21034;
+        }
+        
+        .date-value {
+            color: #D21034;
+            font-weight: bold;
+            padding: 5px 12px;
+            background-color: #fff;
+            border-radius: 6px;
+            border: 1px dashed #ced4da;
+            min-width: 150px;
+            text-align: center;
+        }
+        
+        .date-value.selected {
+            color: #28a745;
+            font-weight: 600;
+            border: 1px solid #28a745;
+            background-color: #f8fff9;
+        }
+        
+        .template-section {
+            text-align: center;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid #006233;
+        }
+        
+        .template-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #D21034, #006233);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .template-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .submission-form {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid #006233;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #006233;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            border: 1px solid #006233;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .keywords-group {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 15px;
+            align-items: start;
+        }
+        
+        .keywords-input {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .keyword-tag {
+            background: #D21034;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin: 2px;
+        }
+        
+        .keyword-tag .remove {
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #D21034, #006233);
+            color: white;
+            padding: 15px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #006233, #D21034);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .english {
+            direction: ltr;
+            text-align: left;
+        }
+        
+        .english .theme-card {
+            border-right: none;
+            border-left: 4px solid #006233;
+        }
+        
+        .english .theme-list {
+            padding-right: 0;
+            padding-left: 20px;
+        }
+        
+        .english .theme-list li {
+            padding-right: 0;
+            padding-left: 20px;
+        }
+        
+        .english .theme-list li::before {
+            right: auto;
+            left: 0;
+        }
+        
+        .english .language-switcher {
+            left: auto;
+            right: 20px;
+        }
+        
+        .english .keywords-group {
+            grid-template-columns: 2fr 1fr;
+        }
+        
+        /* تخصيص Flatpickr للغة العربية */
+        .flatpickr-calendar {
+            direction: rtl;
+        }
+        
+        .flatpickr-months .flatpickr-month {
+            height: 40px;
+        }
+        
+        .flatpickr-weekdays {
+            height: 32px;
+        }
+        
+        .flatpickr-weekday {
+            font-weight: 600;
+        }
+        
+        .flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange, .flatpickr-day.selected.inRange, .flatpickr-day.startRange.inRange, .flatpickr-day.endRange.inRange, .flatpickr-day.selected:focus, .flatpickr-day.startRange:focus, .flatpickr-day.endRange:focus, .flatpickr-day.selected:hover, .flatpickr-day.startRange:hover, .flatpickr-day.endRange:hover, .flatpickr-day.selected.prevMonthDay, .flatpickr-day.startRange.prevMonthDay, .flatpickr-day.endRange.prevMonthDay, .flatpickr-day.selected.nextMonthDay, .flatpickr-day.startRange.nextMonthDay, .flatpickr-day.endRange.nextMonthDay {
+            background: #3498db;
+            border-color: #3498db;
+        }
+        
+        .flatpickr-day.today {
+            border-color: #3498db;
+        }
+        
+        .flatpickr-day.today:hover {
+            background: #3498db;
+            color: white;
+        }
+        
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+        
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header h2 {
+                font-size: 1.3rem;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .committee-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .keywords-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .language-switcher {
+                position: relative;
+                top: 0;
+                left: 0;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+            
+            .english .language-switcher {
+                right: 0;
+            }
+            
+            .date-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .date-value {
+                align-self: stretch;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- العنوان الحكومي -->
+        <div class="government-header">
+            <div class="government-main" id="government-main-ar">الجمهورية الجزائرية الديمقراطية الشعبية</div>
+            <div class="government-sub" id="government-sub-ar">وزارة التعليم العالي والبحث العلمي</div>
+            <div class="school-name" id="school-name-ar">المدرسة العليا للاقتصاد - وهران</div>
+            
+            <div class="government-main" id="government-main-en" style="display: none;">People's Democratic Republic of Algeria</div>
+            <div class="government-sub" id="government-sub-en" style="display: none;">Ministry of Higher Education and Scientific Research</div>
+            <div class="school-name" id="school-name-en" style="display: none;">Higher School of Economics - Oran</div>
+        </div>
+        
+        <!-- رأس الصفحة -->
+        <div class="header">
+            <!-- مبدل اللغات -->
+            <div class="language-switcher">
+                <button class="lang-btn active" onclick="switchLanguage('arabic')">العربية</button>
+                <button class="lang-btn" onclick="switchLanguage('english')">English</button>
+            </div>
+            
+            <h1 id="conference-title">الملتقى الوطني الهجين</h1>
+            <h2 id="conference-theme">"الجباية والاستراتيجية المالية للمؤسسات الجزائرية"</h2>
+        </div>
+        
+        <!-- النسخة العربية -->
+        <div id="arabic-content">
+            <!-- اللجنة -->
+            <div class="section">
+                <h2 class="section-title">اللجنة المنظمة</h2>
+                <div class="committee-grid">
+                    <div class="committee-member">
+                        <div class="role">الرئيسة الشرفية</div>
+                        <div class="name">السيدة خليصة سمعون</div>
+                    </div>
+                    <div class="committee-member">
+                        <div class="role">رئيس الملتقى</div>
+                        <div class="name">د. رابح رنان</div>
+                    </div>
+                    <div class="committee-member">
+                        <div class="role">رئيس اللجنة العلمية</div>
+                        <div class="name">أ. د. فوزي تشيكو</div>
+                    </div>
+                    <div class="committee-member">
+                        <div class="role">رئيس لجنة التنظيم</div>
+                        <div class="name">د. جمال دقيش</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الملخص -->
+            <div class="section">
+                <h2 class="section-title">الملخص (الإشكالية والدوافع)</h2>
+                <div class="content">
+                    <p>تُعدّ <strong>الجباية</strong> ركيزة أساسية في إدارة الاقتصاد، إذ تقوم بوظيفة مزدوجة تتمثل في تمويل الإنفاق العمومي من جهة، وفي كونها أداةً للتحفيز أو الإلزام بالنسبة للمؤسسات من جهة أخرى. وفي الجزائر، تواجه المنظومة الضريبية جملةً من التحديات، من بينها تعزيز تنافسية المؤسسات وضمان موارد جبائية كافية في سياق يسعى إلى تنويع القاعدة الاقتصادية.</p>
+                    
+                    <p>وتعمل المؤسسات الجزائرية ضمن بيئة جبائية معقّدة ومتغيرة باستمرار، ما يستدعي إدماج الاعتبارات الضريبية ضمن استراتيجياتها المالية بغرض تحسين الأداء وتعزيز القدرة على الصمود. سواء تعلّق الأمر بقرارات الاستثمار أو سياسات التمويل أو إدارة التكاليف، فإنّ الجباية تؤثّر في مختلف أبعاد التسيير المؤسسي. ومن ثمّ، يصبح من الضروري تقييم مدى مساهمة النظام الجبائي الجزائري في تحفيز تطوير النسيج الاقتصادي الوطني أو إعاقته.</p>
+                    
+                    <p>يهدف هذا الملتقى الوطني إلى إرساء فضاءٍ للحوار وتبادل الخبرات بين الأكاديميين والمهنيين وصنّاع السياسات لاستكشاف التفاعلات بين الجباية والاستراتيجية المالية في السياق الجزائري. كما يسعى إلى تشخيص العوائق الجبائية، واقتراح مساراتٍ للإصلاح، وإبراز الفرص التي يتيحها نظامٌ ضريبي متكيّف مع احتياجات المؤسسات الحديثة.</p>
+                    
+                    <p>وسيركّز الملتقى على محاور رئيسة مثل تنافسية الجباية، والتهيئة الجبائية (Tax Optimization) والشفافية، إضافةً إلى الإصلاحات المطلوبة لملاءمة الإطار الجبائي مع مستلزمات التنمية المستدامة والإدماج الاقتصادي. كما ستتجه المناقشات نحو صياغة توصيات عملية تُمكّن من بلورة سياسةٍ جبائيةٍ تساند المؤسسات وتضمن في الوقت ذاته العدالة الجبائية والاستقرار الاقتصادي.</p>
+                    
+                    <p>وفي المحصلة، يطمح هذا الحدث إلى توفير مساحةٍ بنّاءة لتحليل وتقويم وتحسين مواءمة الجباية مع الاستراتيجية المالية، بما يعزّز النمو والابتكار في الجزائر.</p>
+                </div>
+            </div>
+            
+            <!-- المحاور -->
+            <div class="section">
+                <h2 class="section-title">محاور الملتقى</h2>
+                <div class="themes-grid">
+                    <div class="theme-card">
+                        <div class="theme-title">1. الجباية وتنافسية المؤسسات الجزائرية</div>
+                        <ul class="theme-list">
+                            <li>تقييم العبء الجبائي وأثره على الربحية</li>
+                            <li>الجباية وجاذبية الاستثمار المحلي والأجنبي</li>
+                            <li>دور الإعفاءات الضريبية في التنافسية القطاعية</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-title">2. الاستراتيجيات المالية تحت القيود الجبائية</div>
+                        <ul class="theme-list">
+                            <li>ممارسات التهيئة الجبائية وأثرها على إدارة الخزينة</li>
+                            <li>تدبير النفقات الجبائية: تحديات وفرص أمام المؤسسات</li>
+                            <li>الجباية والتمويل: استراتيجيات التعبئة والاقتراض</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-title">3. الإصلاحات الجبائية وأثرها على المنظومة الريادية</div>
+                        <ul class="theme-list">
+                            <li>مدى ملاءمة النظام الجبائي للمؤسسات الصغيرة والمتوسطة والمؤسسات المصغّرة</li>
+                            <li>إسهام الإصلاحات الجبائية الحديثة في التنمية الاقتصادية</li>
+                            <li>مقاربات في الجباية المحلية ودورها في أداء الأعمال</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-title">4. الجباية والتنمية المستدامة</div>
+                        <ul class="theme-list">
+                            <li>الآليات الجبائية الداعمة للانتقال البيئي</li>
+                            <li>ضريبة الكربون وانعكاساتها على الصناعات كثيفة الطاقة</li>
+                            <li>تحفيز المسؤولية الاجتماعية للمؤسسات عبر الحوافز الجبائية</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-title">5. عصرنة ورقمنة المنظومة الجبائية</div>
+                        <ul class="theme-list">
+                            <li>تحديات التحول الرقمي للإدارة الجبائية ولمحيط الأعمال</li>
+                            <li>دور الأدوات الرقمية في تعزيز الشفافية ومكافحة الغش الجبائي</li>
+                            <li>آفاق توظيف التكنولوجيات الناشئة في الإدارة الضريبية</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- التواريخ المهمة -->
+            <div class="section">
+                <h2 class="section-title">تواريخ المهمة</h2>
+                <div class="dates-section">
+                    <div class="date-item" onclick="openDatePicker('submission', 'ar')">
+                        <div class="date-label">
+                            <i class="fas fa-paper-plane"></i>
+                            آخر أجل لإرسال المداخلة كاملة
+                        </div>
+                        <div class="date-value" id="submission-date-ar">...... 2025</div>
+                    </div>
+                    <div class="date-item" onclick="openDatePicker('notification', 'ar')">
+                        <div class="date-label">
+                            <i class="fas fa-bell"></i>
+                            تبليغ نتائج التقييم للمؤلفين
+                        </div>
+                        <div class="date-value" id="notification-date-ar">...... 2025</div>
+                    </div>
+                    <div class="date-item" onclick="openDatePicker('conference', 'ar')">
+                        <div class="date-label">
+                            <i class="fas fa-calendar-alt"></i>
+                            تاريخ انعقاد الملتقى
+                        </div>
+                        <div class="date-value" id="conference-date-ar">...... 2025</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- تحميل القالب -->
+            <div class="section">
+                <h2 class="section-title">تحميل القالب</h2>
+                <div class="template-section">
+                    <p>يمكنك تحميل قالب المداخلة باللغة العربية لتسهيل عملية إعداد البحث وفقاً للمعايير المطلوبة:</p>
+                    <a href="https://docs.google.com/document/d/1ro1MEnDLhYOCFmfnb0I_Uw4bq8uAAfq8/export?format=docx" class="template-btn" download="Template_Ar.docx">
+                        <i class="fas fa-download"></i> تحميل القالب (template ar)
+                    </a>
+                    <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">سيتم تحميل القالب بصيغة DOCX من Google Drive</p>
+                </div>
+            </div>
+            
+            <!-- إرسال المداخلة -->
+            <div class="section">
+                <h2 class="section-title">إرسال المداخلة</h2>
+                <div class="submission-form">
+                    <form id="submissionFormAr" action="https://formspree.io/f/mpzzqgqv" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="_language" value="ar">
+                        <div class="form-group">
+                            <label for="nameAr">الاسم الكامل</label>
+                            <input type="text" id="nameAr" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="emailAr">البريد الإلكتروني</label>
+                            <input type="email" id="emailAr" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="affiliationAr">مؤسسة الانتماء</label>
+                            <input type="text" id="affiliationAr" name="affiliation" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="themeAr">المحور</label>
+                            <select id="themeAr" name="theme" required>
+                                <option value="">اختر المحور</option>
+                                <option value="1">الجباية وتنافسية المؤسسات الجزائرية</option>
+                                <option value="2">الاستراتيجيات المالية تحت القيود الجبائية</option>
+                                <option value="3">الإصلاحات الجبائية وأثرها على المنظومة الريادية</option>
+                                <option value="4">الجباية والتنمية المستدامة</option>
+                                <option value="5">عصرنة ورقمنة المنظومة الجبائية</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="abstractAr">ملخص المداخلة</label>
+                            <textarea id="abstractAr" name="abstract" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="keywordsAr">الكلمات المفتاحية</label>
+                            <div class="keywords-group">
+                                <div class="keywords-input">
+                                    <input type="text" id="keywordInputAr" placeholder="أدخل الكلمة المفتاحية">
+                                    <button type="button" class="template-btn" onclick="addKeyword('ar')" style="padding: 8px 15px; font-size: 0.9rem;">
+                                        إضافة كلمة
+                                    </button>
+                                </div>
+                                <div id="keywordsContainerAr" class="keywords-tags"></div>
+                            </div>
+                            <input type="hidden" id="keywordsHiddenAr" name="keywords">
+                        </div>
+                        <div class="form-group">
+                            <label for="fileAr">رفع الملف</label>
+                            <input type="file" id="fileAr" name="file" accept=".doc,.docx,.pdf">
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> إرسال المداخلة
+                        </button>
+                    </form>
+                    <div id="successMessageAr" class="success-message">
+                        <i class="fas fa-check-circle"></i> تم إرسال المداخلة بنجاح! سيتم التواصل معك قريباً.
+                    </div>
+                    <div id="errorMessageAr" class="error-message">
+                        <i class="fas fa-exclamation-circle"></i> حدث خطأ أثناء إرسال المداخلة. يرجى المحاولة مرة أخرى.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- النسخة الإنجليزية -->
+        <div id="english-content" class="english" style="display: none;">
+            <!-- Committee -->
+            <div class="section">
+                <h2 class="section-title">Organizing Committee</h2>
+                <div class="committee-grid">
+                    <div class="committee-member">
+                        <div class="role">Honorary President</div>
+                        <div class="name">Mrs. Khalissa SEMAOUNE</div>
+                    </div>
+                    <div class="committee-member">
+                        <div class="role">Conference Chair</div>
+                        <div class="name">Dr. Rabeh RENNANE</div>
+                    </div>
+                    <div class="committee-member">
+                        <div class="role">Scientific Committee Chair</div>
+                        <div class="name">Prof. Faouzi TCHIKO</div>
+                    </div>
+                    <div class="committee-member">
+                        <div class="role">Organizing Committee Chair</div>
+                        <div class="name">Dr. Djamal DEKKICHE</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Abstract -->
+            <div class="section">
+                <h2 class="section-title">Abstract (Argument)</h2>
+                <div class="content">
+                    <p><strong>Taxation</strong> constitutes a fundamental pillar of economic management, performing a dual function as both a mechanism for public financing and an instrument of incentive or constraint for enterprises. In Algeria, the fiscal framework faces multiple challenges: enhancing business competitiveness while ensuring adequate public revenues within a context of economic diversification.</p>
+                    
+                    <p>Algerian enterprises, operating within a complex and continuously evolving fiscal environment, must incorporate tax considerations into their financial strategies in order to optimise performance and strengthen resilience. Whether in relation to investment decisions, financing policies, or cost management, taxation affects every dimension of corporate operations. It is therefore crucial to assess to what extent the Algerian tax system stimulates or constrains the development of the national economic fabric.</p>
+                    
+                    <p>This national conference aims to create a platform for reflection and exchange among academics, practitioners, and policymakers to explore the interactions between taxation and financial strategy within the Algerian context. It seeks to identify fiscal obstacles, propose avenues for improvement, and highlight opportunities offered by a tax system adapted to the needs of modern enterprises.</p>
+                    
+                    <p>The conference will focus on key themes such as fiscal competitiveness, tax optimization and transparency, as well as the reforms required to align the fiscal framework with the imperatives of sustainable development and economic inclusion. Discussions will also aim to produce concrete recommendations for establishing a tax policy that supports enterprises while ensuring fiscal justice and economic stability.</p>
+                    
+                    <p>Ultimately, this event intends to provide a constructive space for analyzing, critiquing, and improving the alignment between taxation and financial strategy, with the goal of fostering economic growth and innovation in Algeria.</p>
+                </div>
+            </div>
+            
+            <!-- Conference Themes -->
+            <div class="section">
+                <h2 class="section-title">Conference Themes</h2>
+                <div class="themes-grid">
+                    <div class="theme-card">
+                        <div class="theme-title">1. Taxation and Competitiveness of Algerian Enterprises</div>
+                        <ul class="theme-list">
+                            <li>Assessment of the tax burden and its impact on profitability</li>
+                            <li>Taxation and the attractiveness of domestic and foreign investment</li>
+                            <li>The role of tax exemptions in sectoral competitiveness</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-title">2. Financial Strategies under Fiscal Constraints</div>
+                        <ul class="theme-list">
+                            <li>Tax optimization practices and their impact on cash management</li>
+                            <li>Managing tax expenses: challenges and opportunities for enterprises</li>
+                            <li>Taxation and financing: strategies for fundraising and debt management</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-title">3. Tax Reforms and Their Impact on the Entrepreneurial Ecosystem</div>
+                        <ul class="theme-list">
+                            <li>Adaptability of the tax system to SMEs and microenterprises</li>
+                            <li>Contribution of recent tax reforms to economic development</li>
+                            <li>Reflections on local taxation and its role in business performance</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-title">4. Taxation and Sustainable Development</div>
+                        <ul class="theme-list">
+                            <li>Fiscal mechanisms to promote the ecological transition</li>
+                            <li>Carbon taxation and its effects on energy-intensive industries</li>
+                            <li>Promoting corporate social responsibility through tax incentives</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-title">5. Modernization and Digitalization of the Tax System</div>
+                        <ul class="theme-list">
+                            <li>Challenges of digital transformation for tax administration and businesses</li>
+                            <li>The role of digital tools in enhancing tax transparency and combating tax evasion</li>
+                            <li>Prospects for using emerging technologies in fiscal management</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Important Dates -->
+            <div class="section">
+                <h2 class="section-title">Important Dates</h2>
+                <div class="dates-section">
+                    <div class="date-item" onclick="openDatePicker('submission', 'en')">
+                        <div class="date-label">
+                            <i class="fas fa-paper-plane"></i>
+                            Submission deadline (extended abstract)
+                        </div>
+                        <div class="date-value" id="submission-date-en">...... 2025</div>
+                    </div>
+                    <div class="date-item" onclick="openDatePicker('notification', 'en')">
+                        <div class="date-label">
+                            <i class="fas fa-bell"></i>
+                            Notification to authors
+                        </div>
+                        <div class="date-value" id="notification-date-en">...... 2025</div>
+                    </div>
+                    <div class="date-item" onclick="openDatePicker('conference', 'en')">
+                        <div class="date-label">
+                            <i class="fas fa-calendar-alt"></i>
+                            Conference date
+                        </div>
+                        <div class="date-value" id="conference-date-en">...... 2025</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Download Template -->
+            <div class="section">
+                <h2 class="section-title">Download Template</h2>
+                <div class="template-section">
+                    <p>You can download the paper template in English to facilitate the preparation of your research according to the required standards:</p>
+                    <a href="https://docs.google.com/document/d/1Xmf-n_GDZGNoVxkfYUOfvh7n5v_n98TK/export?format=docx" class="template-btn" download="Template_En.docx">
+                        <i class="fas fa-download"></i> Download Template (template en)
+                    </a>
+                    <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">The template will be downloaded as DOCX from Google Drive</p>
+                </div>
+            </div>
+            
+            <!-- Paper Submission -->
+            <div class="section">
+                <h2 class="section-title">Paper Submission</h2>
+                <div class="submission-form">
+                    <form id="submissionFormEn" action="https://formspree.io/f/mpzzqgqv" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="_language" value="en">
+                        <div class="form-group">
+                            <label for="nameEn">Full Name</label>
+                            <input type="text" id="nameEn" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="emailEn">Email Address</label>
+                            <input type="email" id="emailEn" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="affiliationEn">Affiliation</label>
+                            <input type="text" id="affiliationEn" name="affiliation" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="themeEn">Theme</label>
+                            <select id="themeEn" name="theme" required>
+                                <option value="">Select Theme</option>
+                                <option value="1">Taxation and Competitiveness of Algerian Enterprises</option>
+                                <option value="2">Financial Strategies under Fiscal Constraints</option>
+                                <option value="3">Tax Reforms and Their Impact on the Entrepreneurial Ecosystem</option>
+                                <option value="4">Taxation and Sustainable Development</option>
+                                <option value="5">Modernization and Digitalization of the Tax System</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="abstractEn">Abstract</label>
+                            <textarea id="abstractEn" name="abstract" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="keywordsEn">Keywords</label>
+                            <div class="keywords-group">
+                                <div class="keywords-input">
+                                    <input type="text" id="keywordInputEn" placeholder="Enter keyword">
+                                    <button type="button" class="template-btn" onclick="addKeyword('en')" style="padding: 8px 15px; font-size: 0.9rem;">
+                                        Add Keyword
+                                    </button>
+                                </div>
+                                <div id="keywordsContainerEn" class="keywords-tags"></div>
+                            </div>
+                            <input type="hidden" id="keywordsHiddenEn" name="keywords">
+                        </div>
+                        <div class="form-group">
+                            <label for="fileEn">Upload File</label>
+                            <input type="file" id="fileEn" name="file" accept=".doc,.docx,.pdf">
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Submit Paper
+                        </button>
+                    </form>
+                    <div id="successMessageEn" class="success-message">
+                        <i class="fas fa-check-circle"></i> Your paper has been submitted successfully! We will contact you soon.
+                    </div>
+                    <div id="errorMessageEn" class="error-message">
+                        <i class="fas fa-exclamation-circle"></i> An error occurred while submitting your paper. Please try again.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p id="footer-text-ar">© 2025 المدرسة العليا للاقتصاد - وهران. جميع الحقوق محفوظة.</p>
+            <p id="footer-text-en" style="display: none;">© 2025 Higher School of Economics - Oran. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- مدخلات مخفية للتقويم -->
+    <input type="text" id="submission-input-ar" style="display: none;">
+    <input type="text" id="notification-input-ar" style="display: none;">
+    <input type="text" id="conference-input-ar" style="display: none;">
+    
+    <input type="text" id="submission-input-en" style="display: none;">
+    <input type="text" id="notification-input-en" style="display: none;">
+    <input type="text" id="conference-input-en" style="display: none;">
+
+    <!-- مكتبة Flatpickr -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- ترجمة Flatpickr للغة العربية -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ar.js"></script>
+    
+    <script>
+        let keywordsAr = [];
+        let keywordsEn = [];
+        
+        // تهيئة Flatpickr للغة العربية
+        flatpickr.localize(flatpickr.l10ns.ar);
+        
+        // تهيئة التقويمات العربية
+        const submissionPickerAr = flatpickr("#submission-input-ar", {
+            dateFormat: "d M Y",
+            minDate: "today",
+            onChange: function(selectedDates, dateStr) {
+                document.getElementById("submission-date-ar").textContent = dateStr;
+                document.getElementById("submission-date-ar").classList.add("selected");
+                document.getElementById("submission-date-en").textContent = dateStr;
+                document.getElementById("submission-date-en").classList.add("selected");
+            }
+        });
+        
+        const notificationPickerAr = flatpickr("#notification-input-ar", {
+            dateFormat: "d M Y",
+            minDate: "today",
+            onChange: function(selectedDates, dateStr) {
+                document.getElementById("notification-date-ar").textContent = dateStr;
+                document.getElementById("notification-date-ar").classList.add("selected");
+                document.getElementById("notification-date-en").textContent = dateStr;
+                document.getElementById("notification-date-en").classList.add("selected");
+            }
+        });
+        
+        const conferencePickerAr = flatpickr("#conference-input-ar", {
+            dateFormat: "d M Y",
+            minDate: "today",
+            onChange: function(selectedDates, dateStr) {
+                document.getElementById("conference-date-ar").textContent = dateStr;
+                document.getElementById("conference-date-ar").classList.add("selected");
+                document.getElementById("conference-date-en").textContent = dateStr;
+                document.getElementById("conference-date-en").classList.add("selected");
+            }
+        });
+        
+        // تهيئة التقويمات الإنجليزية
+        const submissionPickerEn = flatpickr("#submission-input-en", {
+            dateFormat: "d M Y",
+            minDate: "today",
+            onChange: function(selectedDates, dateStr) {
+                document.getElementById("submission-date-en").textContent = dateStr;
+                document.getElementById("submission-date-en").classList.add("selected");
+                document.getElementById("submission-date-ar").textContent = dateStr;
+                document.getElementById("submission-date-ar").classList.add("selected");
+            }
+        });
+        
+        const notificationPickerEn = flatpickr("#notification-input-en", {
+            dateFormat: "d M Y",
+            minDate: "today",
+            onChange: function(selectedDates, dateStr) {
+                document.getElementById("notification-date-en").textContent = dateStr;
+                document.getElementById("notification-date-en").classList.add("selected");
+                document.getElementById("notification-date-ar").textContent = dateStr;
+                document.getElementById("notification-date-ar").classList.add("selected");
+            }
+        });
+        
+        const conferencePickerEn = flatpickr("#conference-input-en", {
+            dateFormat: "d M Y",
+            minDate: "today",
+            onChange: function(selectedDates, dateStr) {
+                document.getElementById("conference-date-en").textContent = dateStr;
+                document.getElementById("conference-date-en").classList.add("selected");
+                document.getElementById("conference-date-ar").textContent = dateStr;
+                document.getElementById("conference-date-ar").classList.add("selected");
+            }
+        });
+        
+        // دالة لفتح التقويم المناسب
+        function openDatePicker(type, lang) {
+            switch(type) {
+                case 'submission':
+                    if (lang === 'ar') submissionPickerAr.open();
+                    else submissionPickerEn.open();
+                    break;
+                case 'notification':
+                    if (lang === 'ar') notificationPickerAr.open();
+                    else notificationPickerEn.open();
+                    break;
+                case 'conference':
+                    if (lang === 'ar') conferencePickerAr.open();
+                    else conferencePickerEn.open();
+                    break;
+            }
+        }
+        
+        function switchLanguage(lang) {
+            const arabicContent = document.getElementById('arabic-content');
+            const englishContent = document.getElementById('english-content');
+            const arabicBtn = document.querySelector('.lang-btn:nth-child(1)');
+            const englishBtn = document.querySelector('.lang-btn:nth-child(2)');
+            const conferenceTitle = document.getElementById('conference-title');
+            const conferenceTheme = document.getElementById('conference-theme');
+            const governmentMainAr = document.getElementById('government-main-ar');
+            const governmentSubAr = document.getElementById('government-sub-ar');
+            const schoolNameAr = document.getElementById('school-name-ar');
+            const governmentMainEn = document.getElementById('government-main-en');
+            const governmentSubEn = document.getElementById('government-sub-en');
+            const schoolNameEn = document.getElementById('school-name-en');
+            const footerTextAr = document.getElementById('footer-text-ar');
+            const footerTextEn = document.getElementById('footer-text-en');
+            
+            if (lang === 'arabic') {
+                arabicContent.style.display = 'block';
+                englishContent.style.display = 'none';
+                arabicBtn.classList.add('active');
+                englishBtn.classList.remove('active');
+                document.body.setAttribute('dir', 'rtl');
+                conferenceTitle.textContent = 'الملتقى الوطني الهجين';
+                conferenceTheme.textContent = '"الجباية والاستراتيجية المالية للمؤسسات الجزائرية"';
+                governmentMainAr.style.display = 'block';
+                governmentSubAr.style.display = 'block';
+                schoolNameAr.style.display = 'inline-block';
+                governmentMainEn.style.display = 'none';
+                governmentSubEn.style.display = 'none';
+                schoolNameEn.style.display = 'none';
+                footerTextAr.style.display = 'block';
+                footerTextEn.style.display = 'none';
+            } else {
+                arabicContent.style.display = 'none';
+                englishContent.style.display = 'block';
+                arabicBtn.classList.remove('active');
+                englishBtn.classList.add('active');
+                document.body.setAttribute('dir', 'ltr');
+                conferenceTitle.textContent = 'National Hybrid Conference';
+                conferenceTheme.textContent = '"Taxation and Financial Strategy of Algerian Enterprises"';
+                governmentMainAr.style.display = 'none';
+                governmentSubAr.style.display = 'none';
+                schoolNameAr.style.display = 'none';
+                governmentMainEn.style.display = 'block';
+                governmentSubEn.style.display = 'block';
+                schoolNameEn.style.display = 'inline-block';
+                footerTextAr.style.display = 'none';
+                footerTextEn.style.display = 'block';
+            }
+        }
+        
+        function addKeyword(lang) {
+            const inputId = lang === 'ar' ? 'keywordInputAr' : 'keywordInputEn';
+            const containerId = lang === 'ar' ? 'keywordsContainerAr' : 'keywordsContainerEn';
+            const hiddenId = lang === 'ar' ? 'keywordsHiddenAr' : 'keywordsHiddenEn';
+            const keywordArray = lang === 'ar' ? keywordsAr : keywordsEn;
+            
+            const input = document.getElementById(inputId);
+            const keyword = input.value.trim();
+            
+            if (keyword && !keywordArray.includes(keyword)) {
+                keywordArray.push(keyword);
+                updateKeywordsDisplay(lang);
+                document.getElementById(hiddenId).value = keywordArray.join(', ');
+                input.value = '';
+            }
+        }
+        
+        function removeKeyword(lang, index) {
+            const hiddenId = lang === 'ar' ? 'keywordsHiddenAr' : 'keywordsHiddenEn';
+            const keywordArray = lang === 'ar' ? keywordsAr : keywordsEn;
+            keywordArray.splice(index, 1);
+            updateKeywordsDisplay(lang);
+            document.getElementById(hiddenId).value = keywordArray.join(', ');
+        }
+        
+        function updateKeywordsDisplay(lang) {
+            const containerId = lang === 'ar' ? 'keywordsContainerAr' : 'keywordsContainerEn';
+            const keywordArray = lang === 'ar' ? keywordsAr : keywordsEn;
+            
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            keywordArray.forEach((keyword, index) => {
+                const tag = document.createElement('div');
+                tag.className = 'keyword-tag';
+                tag.innerHTML = `
+                    ${keyword}
+                    <span class="remove" onclick="removeKeyword('${lang}', ${index})">×</span>
+                `;
+                container.appendChild(tag);
+            });
+        }
+        
+        // معالجة نموذج الإرسال باستخدام Formspree
+        document.getElementById('submissionFormAr').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (keywordsAr.length === 0) {
+                alert('يرجى إضافة كلمات مفتاحية على الأقل');
+                return;
+            }
+            
+            const formData = new FormData(this);
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            
+            // عرض حالة التحميل
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+            submitBtn.disabled = true;
+            
+            try {
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    document.getElementById('successMessageAr').style.display = 'block';
+                    document.getElementById('errorMessageAr').style.display = 'none';
+                    this.reset();
+                    keywordsAr = [];
+                    updateKeywordsDisplay('ar');
+                    document.getElementById('keywordsHiddenAr').value = '';
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            } catch (error) {
+                document.getElementById('errorMessageAr').style.display = 'block';
+                document.getElementById('successMessageAr').style.display = 'none';
+                console.error('Error:', error);
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+        
+        document.getElementById('submissionFormEn').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (keywordsEn.length === 0) {
+                alert('Please add at least one keyword');
+                return;
+            }
+            
+            const formData = new FormData(this);
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            
+            // عرض حالة التحميل
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+            
+            try {
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    document.getElementById('successMessageEn').style.display = 'block';
+                    document.getElementById('errorMessageEn').style.display = 'none';
+                    this.reset();
+                    keywordsEn = [];
+                    updateKeywordsDisplay('en');
+                    document.getElementById('keywordsHiddenEn').value = '';
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            } catch (error) {
+                document.getElementById('errorMessageEn').style.display = 'block';
+                document.getElementById('successMessageEn').style.display = 'none';
+                console.error('Error:', error);
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
